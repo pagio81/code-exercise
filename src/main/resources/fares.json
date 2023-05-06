@@ -1,0 +1,10 @@
+{
+  "Stop1_Stop2": {"type": "COMPLETE", "priceInDollars": 3.25},
+  "Stop2_Stop3": {"type": "COMPLETE", "priceInDollars": 5.50},
+  "Stop1_Stop3": {"type": "COMPLETE", "priceInDollars": 7.30},
+  "Stop1": {"type": "INCOMPLETE", "priceInDollars": 7.30},
+  "Stop2": {"type": "INCOMPLETE", "priceInDollars": 5.50},
+  "Stop3": {"type": "INCOMPLETE", "priceInDollars": 7.30}
+
+
+}
