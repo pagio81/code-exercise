@@ -1,13 +1,13 @@
 package com.francesco.codeexercise.service.serialisation;
 
-import static com.francesco.codeexercise.service.serialisation.TripSerializer.DELIMITER;
+import static com.francesco.codeexercise.service.serialisation.JourneySerializer.DELIMITER;
 
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.KeyDeserializer;
-import com.francesco.codeexercise.model.Trip;
+import com.francesco.codeexercise.model.Journey;
 import java.io.IOException;
 
-public class TripDeserializer extends KeyDeserializer {
+public class JourneyDeserializer extends KeyDeserializer {
 
   /**
    * this deserializes data from internal database, no need to check for malformed keys
@@ -22,9 +22,9 @@ public class TripDeserializer extends KeyDeserializer {
       throws IOException {
     if(s.indexOf(DELIMITER) >= 0) {
       var tags = s.split(DELIMITER);
-      return Trip.builder().tagOn(tags[0]).tagOff(tags[1]).build();
+      return Journey.builder().tagOn(tags[0]).tagOff(tags[1]).build();
     } else {
-      return Trip.builder().tagOn(s).tagOff(null).build();
+      return Journey.builder().tagOn(s).tagOff(null).build();
     }
   }
 }

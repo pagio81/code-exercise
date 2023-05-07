@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.francesco.codeexercise.model.Fare;
 import com.francesco.codeexercise.model.FareType;
-import com.francesco.codeexercise.model.Trip;
-import com.francesco.codeexercise.service.serialisation.TripDeserializer;
-import com.francesco.codeexercise.service.serialisation.TripSerializer;
+import com.francesco.codeexercise.model.Journey;
+import com.francesco.codeexercise.service.serialisation.JourneyDeserializer;
+import com.francesco.codeexercise.service.serialisation.JourneySerializer;
 import com.google.common.annotations.VisibleForTesting;
 import jakarta.annotation.PostConstruct;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
 public class FareService {
 
   private final ObjectMapper objectMapper;
-  private Map<Trip, Fare> fares;
+  private Map<Journey, Fare> fares;
 
   private static final String FARE_DB_NAME = "fares.json";
 
@@ -39,7 +39,7 @@ public class FareService {
   boolean load() {
     try {
       configureObjectMapper();
-      fares = objectMapper.readValue(ClassLoader.getSystemResource(FARE_DB_NAME), new TypeReference<HashMap<Trip, Fare>>() {});
+      fares = objectMapper.readValue(getClass().getClassLoader().getResourceAsStream(FARE_DB_NAME), new TypeReference<HashMap<Journey, Fare>>() {});
       return !fares.isEmpty();
     } catch (Exception e) {
       log.error("Error loading file database", e);
@@ -53,8 +53,8 @@ public class FareService {
    */
   private void configureObjectMapper() {
     SimpleModule module = new SimpleModule();
-    module.addKeySerializer(Trip.class, new TripSerializer());
-    module.addKeyDeserializer(Trip.class, new TripDeserializer());
+    module.addKeySerializer(Journey.class, new JourneySerializer());
+    module.addKeyDeserializer(Journey.class, new JourneyDeserializer());
     objectMapper.registerModule(module);
   }
 
@@ -72,7 +72,7 @@ public class FareService {
     if(Objects.equals(tagOn,tagOff)) {
       return Fare.builder().type(FareType.CANCELLED).priceInDollars(0).build();
     }
-    return fares.get(Trip.builder().tagOn(tagOn).tagOff(tagOff).build());
+    return fares.get(Journey.builder().tagOn(tagOn).tagOff(tagOff).build());
   }
 
 }

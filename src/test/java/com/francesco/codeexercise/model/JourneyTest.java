@@ -4,14 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-public class TripTest {
+public class JourneyTest {
 
   @Test
   public void test_equal_with_same_direction(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff("Stop2")
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop1").tagOff("Stop2")
+    var tripTwo = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
     assertThat(tripOne).isEqualTo(tripTwo);
@@ -25,10 +25,10 @@ public class TripTest {
 
   @Test
   public void test_equal_with_different_direction(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff("Stop2")
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop2").tagOff("Stop1")
+    var tripTwo = Journey.builder().tagOn("Stop2").tagOff("Stop1")
         .build();
 
     assertThat(tripOne).isEqualTo(tripTwo);
@@ -44,10 +44,10 @@ public class TripTest {
 
   @Test
   public void test_equal_with_one_stop(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff("Stop1")
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop1")
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop1").tagOff("Stop1")
+    var tripTwo = Journey.builder().tagOn("Stop1").tagOff("Stop1")
         .build();
 
     assertThat(tripOne).isEqualTo(tripTwo);
@@ -61,10 +61,10 @@ public class TripTest {
 
   @Test
   public void test_equal_with_only_one_stop(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff(null)
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop1").tagOff(null)
+    var tripTwo = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
     assertThat(tripOne).isEqualTo(tripTwo);
@@ -80,10 +80,10 @@ public class TripTest {
 
   @Test
   public void test_equal_with_only_one_stop_different_direction(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff(null)
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
-    var tripTwo = Trip.builder().tagOn(null).tagOff("Stop1")
+    var tripTwo = Journey.builder().tagOn(null).tagOff("Stop1")
         .build();
 
     assertThat(tripOne).isEqualTo(tripTwo);
@@ -100,10 +100,10 @@ public class TripTest {
 
   @Test
   public void test_not_equal(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff("Stop2")
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop2").tagOff("Stop3")
+    var tripTwo = Journey.builder().tagOn("Stop2").tagOff("Stop3")
         .build();
 
     assertThat(tripOne).isNotEqualTo(tripTwo);
@@ -119,10 +119,10 @@ public class TripTest {
 
   @Test
   public void test_not_equal_with_only_one_stop(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff(null)
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
-    var tripTwo = Trip.builder().tagOn("Stop2").tagOff(null)
+    var tripTwo = Journey.builder().tagOn("Stop2").tagOff(null)
         .build();
 
     assertThat(tripOne).isNotEqualTo(tripTwo);
@@ -131,10 +131,10 @@ public class TripTest {
   }
   @Test
   public void test_not_equal_with_only_one_stop_part_2(){
-    var tripOne = Trip.builder().tagOn("Stop1").tagOff(null)
+    var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
-    var tripTwo = Trip.builder().tagOn(null).tagOff("Stop2")
+    var tripTwo = Journey.builder().tagOn(null).tagOff("Stop2")
         .build();
 
     assertThat(tripOne).isNotEqualTo(tripTwo);

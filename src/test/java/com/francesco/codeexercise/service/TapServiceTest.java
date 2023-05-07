@@ -1,18 +1,19 @@
 package com.francesco.codeexercise.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import com.francesco.codeexercise.exception.InputFileNotFoundException;
 import com.francesco.codeexercise.model.TapType;
 import java.io.File;
-import java.time.Instant;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.csv.CSVParser;
 import org.junit.jupiter.api.Test;
 
 @Log4j2
-public class InputFileServiceTest {
+public class TapServiceTest {
 
-  private InputFileService inputFileService = new InputFileService();
+  private TapService inputFileService = new TapService();
 
   @Test
   public void can_open_file(){
@@ -25,12 +26,19 @@ public class InputFileServiceTest {
   }
 
   @Test
+  public void cannot_open_file(){
+    File f = new File("taps-not-exist.csv");
+    assertThatExceptionOfType(InputFileNotFoundException.class).isThrownBy(()->inputFileService.openFile(f));
+
+  }
+
+  @Test
   public void read() throws Exception{
 
     File f = new File(ClassLoader.getSystemResource("taps.csv").getFile());
     assertThat(f.exists()).isTrue();
 
-    var taps = inputFileService.readTaps(f);
+    var taps = inputFileService.getTaps(f);
 
     var firstTapOptional = taps.findFirst();
     assertThat(firstTapOptional).isNotEmpty();
