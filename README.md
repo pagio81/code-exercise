@@ -93,7 +93,7 @@ Here an example to process a file in a different location:
 process-file --input /Users/francescopagetti/custom-taps.csv --output /Users/francescopagetti/trips-results.csv
 ```
 
-##Assumptions
+## Assumptions
 
 * input file is well formed and is not missing data, otherwise application would end with an error (e.g. bus on tagOn is different from tag off)
 * PAN won't be validated, this opens the possibility to use tokens instead of real credit card numbers
