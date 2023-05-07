@@ -1,6 +1,7 @@
 package com.francesco.codeexercise.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 
 public class TripTest {
@@ -51,6 +52,11 @@ public class TripTest {
 
     assertThat(tripOne).isEqualTo(tripTwo);
     assertThat(tripTwo).isEqualTo(tripOne);
+
+    assertThat(tripOne.hashCode()).isEqualTo(tripTwo.hashCode());
+    assertThat(tripTwo.hashCode()).isEqualTo(tripOne.hashCode());
+
+    assertThat(tripOne.compareTo(tripTwo)).isEqualTo(0);
   }
 
   @Test
@@ -63,6 +69,12 @@ public class TripTest {
 
     assertThat(tripOne).isEqualTo(tripTwo);
     assertThat(tripTwo).isEqualTo(tripOne);
+
+    assertThat(tripOne.hashCode()).isEqualTo(tripTwo.hashCode());
+    assertThat(tripTwo.hashCode()).isEqualTo(tripOne.hashCode());
+
+    assertThat(tripOne.compareTo(tripTwo)).isEqualTo(0);
+
 
   }
 
@@ -77,6 +89,12 @@ public class TripTest {
     assertThat(tripOne).isEqualTo(tripTwo);
     assertThat(tripTwo).isEqualTo(tripOne);
 
+    assertThat(tripOne.hashCode()).isEqualTo(tripTwo.hashCode());
+    assertThat(tripTwo.hashCode()).isEqualTo(tripOne.hashCode());
+
+    assertThat(tripOne.compareTo(tripTwo)).isEqualTo(0);
+
+
   }
 
 
@@ -90,6 +108,11 @@ public class TripTest {
 
     assertThat(tripOne).isNotEqualTo(tripTwo);
     assertThat(tripTwo).isNotEqualTo(tripOne);
+
+    assertThat(tripOne.hashCode()).isNotEqualTo(tripTwo.hashCode());
+    assertThat(tripTwo.hashCode()).isNotEqualTo(tripOne.hashCode());
+
+
 
     assertThat(tripOne.compareTo(tripTwo)).isNotEqualTo(0);
   }

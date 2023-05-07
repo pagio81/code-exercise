@@ -1,7 +1,7 @@
 package com.francesco.codeexercise.model;
 
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,9 +16,7 @@ public class Trip implements Comparable<Trip>{
   String tagOff;
 
   /**
-   * To avoid the fare database grows too much, it is useful to make sure
-   * the direction of the trip doesn't matter.
-   * Tagging on from Stop1 and Tagging off from Stop2
+   * The trip where tagging on from Stop1 and tagging off from Stop2
    * should be the same as tagging on from Stop2 and tagging off Stop 1
    * @param o
    * @return
@@ -37,19 +35,31 @@ public class Trip implements Comparable<Trip>{
         trip.tagOn);
   }
 
-
   /**
-   * To avoid the fare database grows too much, it is useful to make sure
-   * the direction of the trip doesn't matter.
-   * Tagging on from Stop1 and Tagging off from Stop2
+   * The trip where tagging on from Stop1 and tagging off from Stop2
    * should be the same as tagging on from Stop2 and tagging off Stop 1
-   * @return hash-code
+   *
+   * @return
    */
   @Override
   public int hashCode() {
-    return Objects.hash();
+    int hash = 17;
+    int hashMultiplicator = 79;
+    int hashSum = Optional.ofNullable(tagOn).map(t->t.hashCode()).orElse(0) +
+        Optional.ofNullable(tagOff).map(t->t.hashCode()).orElse(0);
+    hash = hashMultiplicator * hash * hashSum;
+    return hash;
   }
 
+  /**
+   * Compare 2 trips, used for sorting the trips in Map. Trips are sorted by tagOn,tagOff
+   * The trip where tagging on from Stop1 and tagging off from Stop2
+   * should be the same as tagging on from Stop2 and tagging off Stop 1
+   * and should return 0.
+   *
+   * @param t the object to be compared.
+   * @return
+   */
   @Override
   public int compareTo(Trip t) {
     var tOn = t.tagOn;
@@ -65,6 +75,12 @@ public class Trip implements Comparable<Trip>{
     return compareTag(this.tagOn, tOn);
   }
 
+  /**
+   * Compare nullabale tags
+   * @param tag1
+   * @param tag2
+   * @return
+   */
   private int compareTag(String tag1, String tag2) {
     if(tag1 != null && tag2 == null) {
       return 1;
