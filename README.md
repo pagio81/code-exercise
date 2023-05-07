@@ -55,7 +55,7 @@ Run:
 ```
 java -jar target/code-exercise-0.0.1-SNAPSHOT.jar
 ```
-Once the shell is open, digit `help` for the aviilable commands:
+Once the shell is open, digit `help` for the available commands:
 ```
 shell:> help
 > AVAILABLE COMMANDS
@@ -73,3 +73,15 @@ shell:> help
 >        process: Process input file "taps.csv" and produce output file "trips.csv"
 >        process-file: Process input/output files with given locations 
 ```
+For example
+```
+process-file --input /Users/francescopagetti/custom-taps.csv --output /Users/francescopagetti/trips-results.csv
+```
+
+The default file taps CSV contains the following scenarios:
+
+PAN: 5500005555555559 -> 2 completed trips (Stop1 -> Stop2) & (Stop2 -> Stop3)
+PAN: 5454545454545454 -> 1 completed trip (Stop1 -> Stop3)
+PAN: 36700102000000 -> 1 completed trip (Stop2 -> Stop1)
+PAN: 34343434343434 -> 1 incomplete trip (Stop2)
+PAN: 5555555555554444 -> 1 cancelled trip (Stop1)
