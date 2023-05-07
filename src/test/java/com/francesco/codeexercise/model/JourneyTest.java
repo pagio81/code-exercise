@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class JourneyTest {
 
   @Test
-  public void test_equal_with_same_direction(){
+  public void test_equal_with_same_direction() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
@@ -24,7 +24,7 @@ public class JourneyTest {
   }
 
   @Test
-  public void test_equal_with_different_direction(){
+  public void test_equal_with_different_direction() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
@@ -43,7 +43,7 @@ public class JourneyTest {
   }
 
   @Test
-  public void test_equal_with_one_stop(){
+  public void test_equal_with_one_stop() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop1")
         .build();
 
@@ -60,7 +60,7 @@ public class JourneyTest {
   }
 
   @Test
-  public void test_equal_with_only_one_stop(){
+  public void test_equal_with_only_one_stop() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
@@ -79,7 +79,7 @@ public class JourneyTest {
   }
 
   @Test
-  public void test_equal_with_only_one_stop_different_direction(){
+  public void test_equal_with_only_one_stop_different_direction() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
@@ -99,7 +99,7 @@ public class JourneyTest {
 
 
   @Test
-  public void test_not_equal(){
+  public void test_not_equal() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff("Stop2")
         .build();
 
@@ -112,13 +112,11 @@ public class JourneyTest {
     assertThat(tripOne.hashCode()).isNotEqualTo(tripTwo.hashCode());
     assertThat(tripTwo.hashCode()).isNotEqualTo(tripOne.hashCode());
 
-
-
     assertThat(tripOne.compareTo(tripTwo)).isNotEqualTo(0);
   }
 
   @Test
-  public void test_not_equal_with_only_one_stop(){
+  public void test_not_equal_with_only_one_stop() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 
@@ -129,8 +127,9 @@ public class JourneyTest {
     assertThat(tripTwo).isNotEqualTo(tripOne);
 
   }
+
   @Test
-  public void test_not_equal_with_only_one_stop_part_2(){
+  public void test_not_equal_with_only_one_stop_part_2() {
     var tripOne = Journey.builder().tagOn("Stop1").tagOff(null)
         .build();
 

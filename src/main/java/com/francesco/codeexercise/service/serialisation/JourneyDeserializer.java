@@ -10,8 +10,9 @@ import java.io.IOException;
 public class JourneyDeserializer extends KeyDeserializer {
 
   /**
-   * this deserializes data from internal database, no need to check for malformed keys
-   * Eventually accept it will fail and application shouldn't start
+   * this deserializes data from internal database, no need to check for malformed keys Eventually
+   * accept it will fail and application shouldn't start
+   *
    * @param s
    * @param deserializationContext
    * @return
@@ -20,7 +21,7 @@ public class JourneyDeserializer extends KeyDeserializer {
   @Override
   public Object deserializeKey(String s, DeserializationContext deserializationContext)
       throws IOException {
-    if(s.indexOf(DELIMITER) >= 0) {
+    if (s.indexOf(DELIMITER) >= 0) {
       var tags = s.split(DELIMITER);
       return Journey.builder().tagOn(tags[0]).tagOff(tags[1]).build();
     } else {

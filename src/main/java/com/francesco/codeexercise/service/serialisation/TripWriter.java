@@ -11,42 +11,42 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.QuoteMode;
 
 /**
- * Hides CSVWriter for the rest of the system and allows to easily
- * replace it with another writer
+ * Hides CSVWriter for the rest of the system and allows to easily replace it with another writer
  */
 @Log4j2
-public class TripWriter implements AutoCloseable{
+public class TripWriter implements AutoCloseable {
+
   private CSVPrinter printer;
 
   public boolean open(File ouputFile) {
     try {
       printer = new CSVPrinter(new FileWriter(ouputFile), CSVFormat.EXCEL.builder().setQuoteMode(
           QuoteMode.NONE).setEscape('/').build());
-      printer.printRecord("Started","Finished","DurationSecs","FromStopId","ToStopId",
-          "ChargeAmount","CompanyId","BusID","PAN","Status");
+      printer.printRecord("Started", "Finished", "DurationSecs", "FromStopId", "ToStopId",
+          "ChargeAmount", "CompanyId", "BusID", "PAN", "Status");
       return true;
     } catch (IOException e) {
-      log.error("Error opening output file "+ouputFile.getName(), e);
+      log.error("Error opening output file " + ouputFile.getName(), e);
       return false;
     }
   }
 
-  public void close(){
+  public void close() {
     try {
       printer.close();
-    } catch (IOException e){
+    } catch (IOException e) {
       log.error("Error closing output file", e);
     }
   }
 
   public boolean writeTrip(Trip trip) {
     try {
-      printer.printRecord(trip.getStarted(),trip.getFinished(),trip.getDurationSecs(),
-          trip.getFromStopId(),trip.getToStopId(),trip.getChargeAmount(),trip.getCompanyId(),
-          trip.getBusID(),trip.getPan(),trip.getStatus());
+      printer.printRecord(trip.getStarted(), trip.getFinished(), trip.getDurationSecs(),
+          trip.getFromStopId(), trip.getToStopId(), trip.getChargeAmount(), trip.getCompanyId(),
+          trip.getBusID(), trip.getPan(), trip.getStatus());
       return true;
     } catch (IOException e) {
-      log.error("Error writing trip "+trip, e);
+      log.error("Error writing trip " + trip, e);
       return false;
     }
   }

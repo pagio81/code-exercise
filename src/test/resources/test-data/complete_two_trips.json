@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "dateTimeUTC": "10-09-2023 10:00:00",
+    "tapType": "ON",
+    "stopId": "Stop1",
+    "companyId": "Company1",
+    "busId": "Bus34",
+    "pan": "5454545454545454"
+  },
+  {
+    "id": 2,
+    "dateTimeUTC": "10-09-2023 10:15:00",
+    "tapType": "OFF",
+    "stopId": "Stop2",
+    "companyId": "Company1",
+    "busId": "Bus34",
+    "pan": "5454545454545454"
+  },
+  {
+    "id": 3,
+    "dateTimeUTC": "10-09-2023 10:16:00",
+    "tapType": "ON",
+    "stopId": "Stop2",
+    "companyId": "Company1",
+    "busId": "Bus34",
+    "pan": "5454545454545454"
+  },
+  {
+    "id": 4,
+    "dateTimeUTC": "10-09-2023 10:26:00",
+    "tapType": "OFF",
+    "stopId": "Stop3",
+    "companyId": "Company1",
+    "busId": "Bus34",
+    "pan": "5454545454545454"
+  }
+]

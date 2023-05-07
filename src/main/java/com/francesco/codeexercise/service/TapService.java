@@ -5,14 +5,14 @@ import com.francesco.codeexercise.exception.InputFileNotFoundException;
 import com.francesco.codeexercise.model.Tap;
 import com.francesco.codeexercise.model.TapType;
 import com.google.common.annotations.VisibleForTesting;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.csv.CSVFormat;
-import org.springframework.stereotype.Service;
-import java.io.File;
 import org.apache.commons.csv.CSVParser;
+import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
@@ -27,7 +27,7 @@ public class TapService {
   @VisibleForTesting
   CSVParser openFile(File inputFile) {
     try {
-      if(!inputFile.exists()) {
+      if (!inputFile.exists()) {
         throw new InputFileNotFoundException("");
       }
 
@@ -42,8 +42,8 @@ public class TapService {
   }
 
   /**
-   * Returns a stream of taps from the source file.
-   * The file is not loaded in  memory, it reads line by line
+   * Returns a stream of taps from the source file. The file is not loaded in  memory, it reads line
+   * by line
    *
    * @param inputFile
    * @return

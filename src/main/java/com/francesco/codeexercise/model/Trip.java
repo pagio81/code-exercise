@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Trip {
+
   String started;
   String finished;
   Long durationSecs;

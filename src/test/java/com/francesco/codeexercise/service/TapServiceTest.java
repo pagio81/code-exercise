@@ -16,7 +16,7 @@ public class TapServiceTest {
   private TapService inputFileService = new TapService();
 
   @Test
-  public void can_open_file(){
+  public void can_open_file() {
     File f = new File(ClassLoader.getSystemResource("taps.csv").getFile());
     assertThat(f.exists()).isTrue();
 
@@ -26,14 +26,15 @@ public class TapServiceTest {
   }
 
   @Test
-  public void cannot_open_file(){
+  public void cannot_open_file() {
     File f = new File("taps-not-exist.csv");
-    assertThatExceptionOfType(InputFileNotFoundException.class).isThrownBy(()->inputFileService.openFile(f));
+    assertThatExceptionOfType(InputFileNotFoundException.class).isThrownBy(
+        () -> inputFileService.openFile(f));
 
   }
 
   @Test
-  public void read() throws Exception{
+  public void read() throws Exception {
 
     File f = new File(ClassLoader.getSystemResource("taps.csv").getFile());
     assertThat(f.exists()).isTrue();

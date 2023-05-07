@@ -3,12 +3,12 @@ package com.francesco.codeexercise.service;
 import com.francesco.codeexercise.model.Tap;
 import com.francesco.codeexercise.model.TapType;
 import com.francesco.codeexercise.service.serialisation.TripWriter;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import java.io.File;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +20,9 @@ public class TripCalculatorService {
   private final TripService tripService;
 
   /**
-   * process trips.
-   * Reads tap file and every time finds a tag off, calculates fare and writes the trip on output file,
-   * Then process all tag ons without a tag off.
+   * process trips. Reads tap file and every time finds a tag off, calculates fare and writes the
+   * trip on output file, Then process all tag ons without a tag off.
+   *
    * @param inputFile
    * @param outputFile
    */
@@ -55,8 +55,14 @@ public class TripCalculatorService {
     }
   }
 
+  /**
+   * process all tags that received a tag on but not a tag off
+   *
+   * @param taps
+   * @param writer
+   */
   void processIncompleteTrips(Map<String, Tap> taps, TripWriter writer) {
-    taps.keySet().stream().forEach(pan->{
+    taps.keySet().stream().forEach(pan -> {
       var tagOn = taps.get(pan);
       var fare = fareService.getFare(tagOn.getStopId(), null);
 

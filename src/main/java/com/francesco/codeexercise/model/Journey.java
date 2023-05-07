@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Journey implements Comparable<Journey>{
+public class Journey implements Comparable<Journey> {
+
   String tagOn;
   String tagOff;
 
   /**
-   * The journey where tagging on from Stop1 and tagging off from Stop2
-   * should be the same as tagging on from Stop2 and tagging off Stop 1
-   * as travelling in opposite direction is the same
+   * The journey where tagging on from Stop1 and tagging off from Stop2 should be the same as
+   * tagging on from Stop2 and tagging off Stop 1 as travelling in opposite direction is the same
+   *
    * @param o
    * @return
    */
@@ -37,8 +38,8 @@ public class Journey implements Comparable<Journey>{
   }
 
   /**
-   * The journey where tagging on from Stop1 and tagging off from Stop2
-   * should be the same as tagging on from Stop2 and tagging off Stop 1
+   * The journey where tagging on from Stop1 and tagging off from Stop2 should be the same as
+   * tagging on from Stop2 and tagging off Stop 1
    *
    * @return
    */
@@ -46,17 +47,16 @@ public class Journey implements Comparable<Journey>{
   public int hashCode() {
     int hash = 17;
     int hashMultiplicator = 79;
-    int hashSum = Optional.ofNullable(tagOn).map(t->t.hashCode()).orElse(0) +
-        Optional.ofNullable(tagOff).map(t->t.hashCode()).orElse(0);
+    int hashSum = Optional.ofNullable(tagOn).map(t -> t.hashCode()).orElse(0) +
+        Optional.ofNullable(tagOff).map(t -> t.hashCode()).orElse(0);
     hash = hashMultiplicator * hash * hashSum;
     return hash;
   }
 
   /**
-   * Compare 2 journeys, used for sorting the trips in Map. Journeys are sorted by tagOn,tagOff
-   * The trip where tagging on from Stop1 and tagging off from Stop2
-   * should be the same as tagging on from Stop2 and tagging off Stop 1
-   * and should return 0.
+   * Compare 2 journeys, used for sorting the trips in Map. Journeys are sorted by tagOn,tagOff The
+   * trip where tagging on from Stop1 and tagging off from Stop2 should be the same as tagging on
+   * from Stop2 and tagging off Stop 1 and should return 0.
    *
    * @param t the object to be compared.
    * @return
@@ -66,30 +66,31 @@ public class Journey implements Comparable<Journey>{
     var tOn = t.tagOn;
     var tOff = t.tagOff;
     //scenario ofn trips on opposit direction
-    if(Objects.equals(t.tagOff,this.tagOn) && Objects.equals(t.tagOn,this.tagOff)) {
+    if (Objects.equals(t.tagOff, this.tagOn) && Objects.equals(t.tagOn, this.tagOff)) {
       tOn = t.tagOff;
       tOff = t.tagOn;
     }
-    if (compareTag(this.tagOn,tOn) == 0) {
-      return compareTag(this.tagOff,tOff);
+    if (compareTag(this.tagOn, tOn) == 0) {
+      return compareTag(this.tagOff, tOff);
     }
     return compareTag(this.tagOn, tOn);
   }
 
   /**
    * Compare nullabale tags
+   *
    * @param tag1
    * @param tag2
    * @return
    */
   private int compareTag(String tag1, String tag2) {
-    if(tag1 != null && tag2 == null) {
+    if (tag1 != null && tag2 == null) {
       return 1;
     }
-    if(tag1 == null && tag2 != null) {
+    if (tag1 == null && tag2 != null) {
       return -1;
     }
-    if(tag1 == null && tag2 == null) {
+    if (tag1 == null && tag2 == null) {
       return 0;
     }
     return tag1.compareTo(tag2);

@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "dateTimeUTC": "10-09-2023 10:00:00",
+    "tapType": "ON",
+    "stopId": "Stop1",
+    "companyId": "Company1",
+    "busId": "Bus34",
+    "pan": "5454545454545454"
+  }
+]

@@ -1,5 +1,8 @@
 package com.francesco.codeexercise.app;
 
+import com.francesco.codeexercise.exception.InputFileMalformedException;
+import com.francesco.codeexercise.exception.InputFileNotFoundException;
+import com.francesco.codeexercise.exception.ValidationException;
 import com.francesco.codeexercise.service.TripCalculatorService;
 import java.io.File;
 import lombok.AllArgsConstructor;
@@ -17,19 +20,25 @@ public class CodeExcerciseCommands {
 
   private final TripCalculatorService tripCalculatorService;
 
-  @ShellMethod("Process input file \""+INPUT_FILE_NAME+"\" and produce output file \""+OUTPUT_FILE_NAME+"\"")
+  @ShellMethod(
+      "Process input file \"" + INPUT_FILE_NAME + "\" and produce output file \"" + OUTPUT_FILE_NAME
+          + "\"")
   public void process() {
-    processFile(INPUT_FILE_NAME,OUTPUT_FILE_NAME);
+    processFile(INPUT_FILE_NAME, OUTPUT_FILE_NAME);
   }
 
   @ShellMethod("Process input/output files with given locations ")
   public void processFile(String input, String output) {
     File fileInput = new File(input);
-    log.info("Processing file: {}", ()-> fileInput.getAbsolutePath());
+    log.info("Processing file: {}", () -> fileInput.getAbsolutePath());
     File fileOutput = new File(output);
-    log.info("Write on file: {}", ()-> fileOutput.getAbsolutePath());
-
-    tripCalculatorService.processTrips(fileInput, fileOutput);
+    log.info("Write on file: {}", () -> fileOutput.getAbsolutePath());
+    try {
+      tripCalculatorService.processTrips(fileInput, fileOutput);
+    } catch (ValidationException | InputFileNotFoundException | InputFileMalformedException e) {
+      System.err.println(String.format("Error processing tap file: %s", e.getMessage()));
+      System.exit(-1);
+    }
 
   }
 }
