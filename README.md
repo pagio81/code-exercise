@@ -73,15 +73,31 @@ shell:> help
 >        process: Process input file "taps.csv" and produce output file "trips.csv"
 >        process-file: Process input/output files with given locations 
 ```
+
 For example
 ```
-process-file --input /Users/francescopagetti/custom-taps.csv --output /Users/francescopagetti/trips-results.csv
+process
 ```
 
-The default file taps CSV contains the following scenarios:
+Will process the default file `taps.csv` which contains the following scenarios:
 
 PAN: 5500005555555559 -> 2 completed trips (Stop1 -> Stop2) & (Stop2 -> Stop3)
 PAN: 5454545454545454 -> 1 completed trip (Stop1 -> Stop3)
 PAN: 36700102000000 -> 1 completed trip (Stop2 -> Stop1)
 PAN: 34343434343434 -> 1 incomplete trip (Stop2)
 PAN: 5555555555554444 -> 1 cancelled trip (Stop1)
+
+Here an example to process a file in a different location:
+
+```
+process-file --input /Users/francescopagetti/custom-taps.csv --output /Users/francescopagetti/trips-results.csv
+```
+
+##Assumptions
+
+* input file is well formed and is not missing data, otherwise application would end with an error (e.g. bus on tagOn is different from tag off)
+* PAN won't be validated, this opens the possibility to use tokens instead of real credit card numbers
+* if user in the same file tagged on and off multiple times, e.g. changed a bus, the tags are registered in the correct order and it is ok as outcome to have 2 trips 
+* Application was written to minimise the database entries (need to register only fare for Stop1->Stop2 , Stop2-Stop1 is dealt programmatically)
+* DB is loaded in memory, its is not expected a huge amount (~100k stops are less than 10MB) 
+* Application was optimised to don't load input and output files all in memory, instead stream them as they may be vey big

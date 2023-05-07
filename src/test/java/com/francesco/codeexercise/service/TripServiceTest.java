@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.francesco.codeexercise.exception.ValidationException;
 import com.francesco.codeexercise.model.Fare;
-import com.francesco.codeexercise.model.FareType;
+import com.francesco.codeexercise.model.TripType;
 import com.francesco.codeexercise.model.Tap;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class TripServiceTest {
         .stopId("Stop1").busId("Bus37").companyId("Company1").build();
     var tapOff = Tap.builder().pan("5500005555555559").dateTimeUTC("23-09-2023 00:05:00")
         .stopId("Stop2").busId("Bus37").companyId("Company1").build();
-    var fare = Fare.builder().priceInDollars(3.25).type(FareType.COMPLETE).build();
+    var fare = Fare.builder().priceInDollars(3.25).type(TripType.COMPLETED).build();
     var trip = tripService.getTrip(tapOn, tapOff, fare);
     assertThat(trip.getDurationSecs()).isEqualTo(600L);
     assertThat(trip.getBusID()).isEqualTo("Bus37");
@@ -40,7 +40,7 @@ public class TripServiceTest {
     assertThat(trip.getFromStopId()).isEqualTo("Stop1");
     assertThat(trip.getToStopId()).isEqualTo("Stop2");
     assertThat(trip.getChargeAmount()).isEqualTo(3.25);
-    assertThat(trip.getStatus()).isEqualTo(FareType.COMPLETE);
+    assertThat(trip.getStatus()).isEqualTo(TripType.COMPLETED);
 
   }
 
@@ -48,7 +48,7 @@ public class TripServiceTest {
   public void test_incomplete_trip() {
     var tapOn = Tap.builder().pan("5500005555555559").dateTimeUTC("22-09-2023 23:55:00")
         .stopId("Stop1").busId("Bus37").companyId("Company1").build();
-    var fare = Fare.builder().priceInDollars(3.25).type(FareType.INCOMPLETE).build();
+    var fare = Fare.builder().priceInDollars(3.25).type(TripType.INCOMPLETE).build();
     var trip = tripService.getTrip(tapOn, fare);
     assertThat(trip.getDurationSecs()).isEqualTo(-1L);
     assertThat(trip.getBusID()).isEqualTo("Bus37");
@@ -57,7 +57,7 @@ public class TripServiceTest {
     assertThat(trip.getFromStopId()).isEqualTo("Stop1");
     assertThat(trip.getToStopId()).isEqualTo("-");
     assertThat(trip.getChargeAmount()).isEqualTo(3.25);
-    assertThat(trip.getStatus()).isEqualTo(FareType.INCOMPLETE);
+    assertThat(trip.getStatus()).isEqualTo(TripType.INCOMPLETE);
 
   }
 
@@ -67,7 +67,7 @@ public class TripServiceTest {
         .stopId("Stop1").busId("Bus37").companyId("Company1").build();
     var tapOff = Tap.builder().pan("5500005555555558").dateTimeUTC("23-09-2023 00:05:00")
         .stopId("Stop2").busId("Bus37").companyId("Company1").build();
-    var fare = Fare.builder().priceInDollars(3.25).type(FareType.COMPLETE).build();
+    var fare = Fare.builder().priceInDollars(3.25).type(TripType.COMPLETED).build();
     assertThatExceptionOfType(ValidationException.class).isThrownBy(
         () -> tripService.getTrip(tapOn, tapOff, fare));
 
@@ -79,7 +79,7 @@ public class TripServiceTest {
         .stopId("Stop1").busId("Bus37").companyId("Company1").build();
     var tapOff = Tap.builder().pan("5500005555555559").dateTimeUTC("23-09-2023 00:05:00")
         .stopId("Stop2").busId("Bus38").companyId("Company1").build();
-    var fare = Fare.builder().priceInDollars(3.25).type(FareType.COMPLETE).build();
+    var fare = Fare.builder().priceInDollars(3.25).type(TripType.COMPLETED).build();
     assertThatExceptionOfType(ValidationException.class).isThrownBy(
         () -> tripService.getTrip(tapOn, tapOff, fare));
 
@@ -91,7 +91,7 @@ public class TripServiceTest {
         .stopId("Stop1").busId("Bus37").companyId("Company1").build();
     var tapOff = Tap.builder().pan("5500005555555559").dateTimeUTC("23-09-2023 00:05:00")
         .stopId("Stop2").busId("Bus37").companyId("Company2").build();
-    var fare = Fare.builder().priceInDollars(3.25).type(FareType.COMPLETE).build();
+    var fare = Fare.builder().priceInDollars(3.25).type(TripType.COMPLETED).build();
     assertThatExceptionOfType(ValidationException.class).isThrownBy(
         () -> tripService.getTrip(tapOn, tapOff, fare));
 

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Fare {
 
-  FareType type;
+  TripType type;
   double priceInDollars;
 }

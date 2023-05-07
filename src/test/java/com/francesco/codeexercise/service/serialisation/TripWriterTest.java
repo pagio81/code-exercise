@@ -2,7 +2,7 @@ package com.francesco.codeexercise.service.serialisation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.francesco.codeexercise.model.FareType;
+import com.francesco.codeexercise.model.TripType;
 import com.francesco.codeexercise.model.Trip;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,7 +43,7 @@ public class TripWriterTest {
           .companyId("Company1")
           .busID("Bus37")
           .pan("5500005555555559")
-          .status(FareType.COMPLETE)
+          .status(TripType.COMPLETED)
           .build());
       writer.flush();
 
@@ -52,7 +52,7 @@ public class TripWriterTest {
       assertThat(lines.get(0)).isEqualTo("Started,Finished,DurationSecs,FromStopId,ToStopId,"
           + "ChargeAmount,CompanyId,BusID,PAN,Status");//header
       assertThat(lines.get(1)).isEqualTo("10-08-2023 10:00:00,10-08-2023 10:10:00,600,Stop1,Stop2,"
-          + "3.25,Company1,Bus37,5500005555555559,COMPLETE");//header
+          + "3.25,Company1,Bus37,5500005555555559,COMPLETED");//header
 
       assertThat(result).isTrue();
     }

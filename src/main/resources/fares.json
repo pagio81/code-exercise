@@ -1,14 +1,14 @@
 {
   "Stop1_Stop2": {
-    "type": "COMPLETE",
+    "type": "COMPLETED",
     "priceInDollars": 3.25
   },
   "Stop2_Stop3": {
-    "type": "COMPLETE",
+    "type": "COMPLETED",
     "priceInDollars": 5.50
   },
   "Stop1_Stop3": {
-    "type": "COMPLETE",
+    "type": "COMPLETED",
     "priceInDollars": 7.30
   },
   "Stop1": {

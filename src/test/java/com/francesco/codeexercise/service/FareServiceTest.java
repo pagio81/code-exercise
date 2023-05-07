@@ -3,7 +3,7 @@ package com.francesco.codeexercise.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.francesco.codeexercise.model.FareType;
+import com.francesco.codeexercise.model.TripType;
 import org.junit.jupiter.api.Test;
 
 
@@ -21,19 +21,19 @@ class FareServiceTest {
     fareService.load();
 
     var fare = fareService.getFare("Stop1", "Stop2");
-    assertThat(fare.getType()).isEqualTo(FareType.COMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.COMPLETED);
     assertThat(fare.getPriceInDollars()).isEqualTo(3.25);
 
     fare = fareService.getFare("Stop2", "Stop1");
-    assertThat(fare.getType()).isEqualTo(FareType.COMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.COMPLETED);
     assertThat(fare.getPriceInDollars()).isEqualTo(3.25);
 
     fare = fareService.getFare("Stop1", "Stop3");
-    assertThat(fare.getType()).isEqualTo(FareType.COMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.COMPLETED);
     assertThat(fare.getPriceInDollars()).isEqualTo(7.30);
 
     fare = fareService.getFare("Stop3", "Stop2");
-    assertThat(fare.getType()).isEqualTo(FareType.COMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.COMPLETED);
     assertThat(fare.getPriceInDollars()).isEqualTo(5.50);
 
 
@@ -45,19 +45,19 @@ class FareServiceTest {
     fareService.load();
 
     var fare = fareService.getFare("Stop1", null);
-    assertThat(fare.getType()).isEqualTo(FareType.INCOMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.INCOMPLETE);
     assertThat(fare.getPriceInDollars()).isEqualTo(7.30);
 
     fare = fareService.getFare(null, "Stop1");
-    assertThat(fare.getType()).isEqualTo(FareType.INCOMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.INCOMPLETE);
     assertThat(fare.getPriceInDollars()).isEqualTo(7.30);
 
     fare = fareService.getFare(null, "Stop3");
-    assertThat(fare.getType()).isEqualTo(FareType.INCOMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.INCOMPLETE);
     assertThat(fare.getPriceInDollars()).isEqualTo(7.30);
 
     fare = fareService.getFare(null, "Stop2");
-    assertThat(fare.getType()).isEqualTo(FareType.INCOMPLETE);
+    assertThat(fare.getType()).isEqualTo(TripType.INCOMPLETE);
     assertThat(fare.getPriceInDollars()).isEqualTo(5.50);
 
   }
@@ -68,7 +68,7 @@ class FareServiceTest {
     fareService.load();
 
     var fare = fareService.getFare("Stop1", "Stop1");
-    assertThat(fare.getType()).isEqualTo(FareType.CANCELLED);
+    assertThat(fare.getType()).isEqualTo(TripType.CANCELLED);
     assertThat(fare.getPriceInDollars()).isEqualTo(0);
   }
 

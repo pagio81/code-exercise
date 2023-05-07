@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.francesco.codeexercise.model.Fare;
-import com.francesco.codeexercise.model.FareType;
+import com.francesco.codeexercise.model.TripType;
 import com.francesco.codeexercise.model.Journey;
 import com.francesco.codeexercise.service.serialisation.JourneyDeserializer;
 import com.francesco.codeexercise.service.serialisation.JourneySerializer;
@@ -70,7 +70,7 @@ public class FareService {
    */
   public Fare getFare(String tagOn, String tagOff) {
     if (Objects.equals(tagOn, tagOff)) {
-      return Fare.builder().type(FareType.CANCELLED).priceInDollars(0).build();
+      return Fare.builder().type(TripType.CANCELLED).priceInDollars(0).build();
     }
     return fares.get(Journey.builder().tagOn(tagOn).tagOff(tagOff).build());
   }

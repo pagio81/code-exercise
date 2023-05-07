@@ -16,5 +16,5 @@ public class Trip {
   String companyId;
   String busID;
   String pan;
-  FareType status;
+  TripType status;
 }
